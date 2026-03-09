@@ -1,0 +1,69 @@
+---
+import SeoGeoChecklist from "./react/SeoGeoChecklist";
+const brandName = import.meta.env.PUBLIC_BRAND_NAME || "AutoContent";
+---
+
+<section class="relative overflow-hidden">
+  <!-- White at top and bottom, soft colors in middle -->
+  <div
+    class="absolute inset-0"
+    style="background: linear-gradient(to bottom, white 0%, rgb(247 254 231 / 0.5) 25%, rgb(224 242 254 / 0.4) 50%, rgb(237 233 254 / 0.4) 75%, white 100%);"
+    aria-hidden="true"
+  >
+  </div>
+  <!-- Grid: faint lines with blend so intersections don’t double up; fades in/out top to bottom -->
+  <div
+    class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_0%,black_42%,black_72%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_42%,black_72%,transparent_100%)]"
+    style="background-size: 6rem 3rem; background-image: linear-gradient(to right, rgba(225,225,223,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(225,225,223,0.5) 1px, transparent 1px);"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-12 sm:pb-16 lg:px-8"
+  >
+    <div class="max-w-4xl text-left">
+      <h1
+        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-5xl"
+        style="line-height: 1.25;"
+      >
+        Improve <span class="px-2 pb-1 rounded-xl bg-[#a3e63590]"
+          >GEO</span>,
+      </h1>
+      <h1
+        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-5xl"
+        style="line-height: 1.25;"
+      >
+        Boost your business ROI with <br /><span class="px-2 pb-1 rounded-xl bg-[#a3e63590]"
+          >AI Technology</span
+        >
+      </h1>
+      <p class="mt-10 font-normal text-lg lg:text-xl text-gray-500">
+        Optimize your website's SEO, GEO and AEO, audit site's content, scan blogs for required topics or content gaps and suggests content refresh to stay ahead of the competition.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="#"
+          class="rounded-lg bg-gray-800 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-gray-800"
+          >Get Started</a
+        >
+        <a
+          href="#"
+          class="rounded-lg bg-white shadow-sm border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+          >Read More</a
+        >
+      </div>
+    </div>
+
+    <!-- SEO & GEO Checklist with scoring and ApexCharts -->
+    <div class="relative mt-16">
+      <div
+        class="absolute -inset-6 rounded-2xl bg-gradient-to-r from-lime-100/50 via-sky-100/40 to-violet-100/40 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative">
+        <SeoGeoChecklist client:load />
+      </div>
+    </div>
+  </div>
+</section>

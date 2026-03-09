@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoContent — Project Planning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            ink: {
+              50: '#fafafa',
+              100: '#f5f5f5',
+              200: '#e5e5e5',
+              300: '#d4d4d4',
+              400: '#a3a3a3',
+              500: '#737373',
+              600: '#525252',
+              700: '#404040',
+              800: '#262626',
+              900: '#171717',
+              950: '#0a0a0a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+    pre { overflow-x: auto; }
+    .prose pre { background: #0a0a0a; }
+    html { scroll-behavior: smooth; }
+    .sidebar-overlay { backdrop-filter: blur(4px); }
+    .nav-link.nav-link-active { background-color: #e5e5e5; font-weight: 500; color: #171717; }
+    .subtopic-link-active { color: #404040; font-weight: 600; }
+    @keyframes breadcrumb-slide-up {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes breadcrumb-slide-down {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .breadcrumb-slide-up { animation: breadcrumb-slide-up 0.25s ease-out forwards; }
+    .breadcrumb-slide-down { animation: breadcrumb-slide-down 0.25s ease-out forwards; }
+  </style>
+</head>
+<body class="bg-ink-50 font-sans text-ink-900 antialiased">
+  <div class="flex min-h-screen" x-data="{ sidebarOpen: false }">
+    <!-- Mobile overlay -->
+    <div x-show="sidebarOpen" x-cloak
+         x-transition:enter="transition-opacity duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="sidebarOpen = false"
+         class="fixed inset-0 z-40 bg-ink-950/50 sidebar-overlay lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside class="fixed inset-y-0 left-0 z-50 flex h-screen w-72 flex-col border-r border-ink-200 bg-white transition-transform duration-300 lg:translate-x-0"
+         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+      <div class="flex h-14 shrink-0 items-center justify-between border-b border-ink-200 px-6 lg:px-5">
+        <span class="font-bold text-lg text-ink-900 tracking-tight">AutoContent</span>
+        <button @click="sidebarOpen = false" class="rounded-lg p-2 text-ink-600 hover:bg-ink-100 lg:hidden">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
+      <nav class="flex-1 overflow-y-auto px-4 py-8">
+        <ul class="space-y-1 text-sm">
+          <li><a href="#intro" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="intro">Introduction</a></li>
+          <li><a href="#architecture" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="architecture">Overall System Architecture</a></li>
+          <li><a href="#flow" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="flow">Step-by-Step Flow</a></li>
+          <li><a href="#competitors" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="competitors">Competitor Discovery</a></li>
+          <li><a href="#seo" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="seo">SEO / GEO / AEO Analysis</a></li>
+          <li><a href="#blog" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="blog">Blog Intelligence Agent</a></li>
+          <li><a href="#reviews" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="reviews">Review Intelligence</a></li>
+          <li><a href="#footfall" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="footfall">Footfall / Demand Estimator</a></li>
+          <li><a href="#gap" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="gap">Gap Analysis Agent</a></li>
+          <li><a href="#score" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="score">Business Score Agent</a></li>
+          <li><a href="#strategy" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="strategy">Strategy Agent</a></li>
+          <li><a href="#content" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="content">Content Creation Agents</a></li>
+          <li><a href="#techstack" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="techstack">Multi-Agent Tech Stack</a></li>
+          <li><a href="#example" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="example">Example Agent Implementation</a></li>
+          <li><a href="#why" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="why">Why This Idea Is Powerful</a></li>
+          <li><a href="#difficulty" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="difficulty">Difficulty Level</a></li>
+          <li><a href="#mvp" class="nav-link flex items-center gap-2 rounded-md px-3 py-2 text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-900" data-section="mvp">MVP Scope (Important)</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex min-w-0 flex-1 flex-col lg:ml-72">
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-ink-200 bg-white/95 px-4 backdrop-blur-sm lg:px-12">
+        <button @click="sidebarOpen = true" class="rounded-lg p-2 text-ink-600 hover:bg-ink-100 lg:hidden">
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+        <div class="flex min-w-0 flex-1 items-center overflow-hidden text-sm text-ink-600" aria-live="polite">
+          <div id="topbar-breadcrumb" class="flex min-w-0 flex-1 items-baseline truncate">
+            <span class="inline-flex items-baseline overflow-hidden">
+              <span id="breadcrumb-section" class="inline-block min-w-0 truncate">Introduction</span>
+            </span>
+            <span id="breadcrumb-subtopic-wrap" class="hidden inline-flex items-baseline overflow-hidden">
+              <span class="shrink-0 px-1.5 text-ink-500">›</span>
+              <span id="breadcrumb-subtopic-text" class="inline-block min-w-0 truncate"></span>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <main class="flex flex-1 gap-8 px-4 py-8 lg:px-12 lg:py-12">
+        <div class="min-w-0 flex-1">
+          <article class="mx-auto max-w-3xl space-y-16">
+          <!-- Intro -->
+          <section id="intro" class="scroll-mt-24">
+            <p class="text-lg leading-relaxed text-ink-600">
+              What you're describing is essentially an <strong class="text-ink-900">AI Growth Intelligence System</strong> — a multi-agent platform that analyzes a business, its competitors, and the local market, then <strong class="text-ink-900">generates strategy + content automatically</strong>.
+            </p>
+            <p class="mt-4 text-ink-600">
+              To make it buildable, you should break it into <strong class="text-ink-900">specialized agents</strong> instead of one big AI.
+            </p>
+          </section>
+
+          <!-- 1. Architecture -->
+          <section id="architecture" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              1. Overall System Architecture
+            </h2>
+            <p class="mb-4 text-ink-600">A practical architecture looks like this:</p>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-6 font-mono text-sm leading-relaxed text-ink-100"><code>User Input
+   │
+   ▼
+Orchestrator Agent
+   │
+   ├── Data Collection Agents
+   │     ├─ Website Scraper
+   │     ├─ Google/Maps Search Agent
+   │     ├─ Document Parser
+   │
+   ├── Competitor Intelligence Agents
+   │     ├─ Competitor Finder
+   │     ├─ Local Competitor Analyzer
+   │     ├─ SEO Analyzer
+   │     ├─ GEO/AEO Analyzer
+   │
+   ├── Market Insight Agents
+   │     ├─ Review Analyzer
+   │     ├─ Footfall / Demand Estimator
+   │     ├─ Customer Preference Analyzer
+   │
+   ├── Strategy Agents
+   │     ├─ Gap Analyzer
+   │     ├─ Opportunity Finder
+   │     ├─ Scoring Agent
+   │
+   └── Content Generation Agents
+         ├─ Blog Creator
+         ├─ Social Campaign Generator
+         ├─ Email Campaign Agent
+         ├─ Ad Copy Generator</code></pre>
+          </section>
+
+          <!-- 2. Flow -->
+          <section id="flow" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              2. Step-by-Step Flow
+            </h2>
+
+            <div class="space-y-8">
+              <div>
+                <h3 id="flow-step-1" class="mb-3 text-lg font-medium text-ink-900 scroll-mt-24">
+                  Step 1 — User Input
+                </h3>
+                <p class="mb-4 text-ink-600">User provides:</p>
+                <pre class="mb-4 overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-5 font-mono text-sm text-ink-100"><code>Type: Business / Product
+Name
+Website
+Location(s)
+Industry
+Description (optional)
+Blog URL
+Documents (optional)</code></pre>
+              </div>
+
+              <div>
+                <h3 id="flow-step-2" class="mb-3 text-lg font-medium text-ink-900 scroll-mt-24">
+                  Step 2 — Data Collection Agents
+                </h3>
+                <p class="mb-4 text-ink-600">Agents gather raw data.</p>
+
+                <div class="space-y-6 rounded-xl border border-ink-200 bg-white p-6">
+                  <div>
+                    <h4 class="mb-2 font-medium text-ink-900">Website Scraper Agent</h4>
+                    <p class="mb-3 text-sm text-ink-600">Extract: services, keywords, meta tags, blog titles, headings, schema</p>
+                    <p class="text-sm font-medium text-ink-700">Tools: Playwright, Firecrawl, BeautifulSoup</p>
+                  </div>
+                  <div>
+                    <h4 class="mb-2 font-medium text-ink-900">Document Parser Agent</h4>
+                    <p class="mb-3 text-sm text-ink-600">If user uploads: PDFs, marketing docs, brand guides</p>
+                    <p class="text-sm font-medium text-ink-700">Use: LangChain document loaders, embeddings, vector database</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Competitors -->
+          <section id="competitors" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              3. Competitor Discovery
+            </h2>
+
+            <div class="space-y-6">
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="competitors-finder" class="mb-3 font-medium text-ink-900 scroll-mt-24">Competitor Finder Agent</h3>
+                <p class="mb-4 text-sm text-ink-600">Search queries like:</p>
+                <pre class="mb-4 overflow-x-auto rounded-lg bg-ink-100 p-4 font-mono text-sm text-ink-800"><code>"best {industry} near {location}"
+"{industry} companies in {city}"
+"{product} alternatives"</code></pre>
+                <p class="mb-2 text-sm text-ink-600">Sources: Google search, Google Maps, business directories, review sites</p>
+                <p class="text-sm text-ink-600">Extract: name, website, rating, reviews, address, distance</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="competitors-filter" class="mb-3 font-medium text-ink-900 scroll-mt-24">Local Competitor Filter</h3>
+                <p class="mb-2 text-sm text-ink-600">Filter: <code class="rounded bg-ink-200 px-1.5 py-0.5 font-mono text-ink-800">distance <= 50 km</code></p>
+                <p class="text-sm text-ink-600">Use: Maps API, Geo coordinates, Haversine formula</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. SEO -->
+          <section id="seo" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              4. SEO / GEO / AEO Analysis
+            </h2>
+
+            <div class="space-y-6">
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="seo-agent" class="mb-3 font-medium text-ink-900 scroll-mt-24">SEO Agent</h3>
+                <p class="mb-3 text-sm text-ink-600">Check competitors for: domain authority, backlinks, keywords ranking, blog frequency, meta optimization</p>
+                <p class="text-sm font-medium text-ink-700">Tools: Ahrefs API, SEMrush, SerpAPI</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="seo-geo" class="mb-3 font-medium text-ink-900 scroll-mt-24">GEO (Generative Engine Optimization)</h3>
+                <p class="mb-3 text-sm text-ink-600">Analyze if competitors appear in AI answers. Example prompts:</p>
+                <pre class="mb-3 overflow-x-auto rounded-lg bg-ink-100 p-3 font-mono text-sm text-ink-800"><code>Best digital marketing agency in Pune
+Top cafes in Bangalore</code></pre>
+                <p class="text-sm text-ink-600">Agent checks: which businesses appear, how they are described, what keywords used</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="seo-aeo" class="mb-3 font-medium text-ink-900 scroll-mt-24">AEO (Answer Engine Optimization)</h3>
+                <p class="text-sm text-ink-600">Analyze: FAQ schema, structured data, featured snippets, Q&A content</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5. Blog -->
+          <section id="blog" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              5. Blog Intelligence Agent
+            </h2>
+            <p class="mb-4 text-ink-600">Extract competitor blogs: topics, length, keywords, engagement, publishing frequency</p>
+            <p class="text-ink-600">Then detect: high traffic topics, content gaps, evergreen topics</p>
+          </section>
+
+          <!-- 6. Reviews -->
+          <section id="reviews" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              6. Review Intelligence
+            </h2>
+            <p class="mb-4 text-ink-600">Scrape reviews from: Google Maps, Yelp, Trustpilot, App stores (for products)</p>
+            <p class="mb-4 text-ink-600">Then run <strong>sentiment + topic analysis</strong>. Example output:</p>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-5 font-mono text-sm text-ink-100"><code>Positive
+• fast delivery
+• friendly staff
+
+Negative
+• parking issue
+• slow support</code></pre>
+          </section>
+
+          <!-- 7. Footfall -->
+          <section id="footfall" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              7. Footfall / Demand Estimator
+            </h2>
+            <p class="mb-4 text-ink-600">Since real footfall data is hard, estimate using signals:</p>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-5 font-mono text-sm text-ink-100"><code>reviews frequency
+Google popularity times
+search volume
+map rankings
+social mentions</code></pre>
+          </section>
+
+          <!-- 8. Gap -->
+          <section id="gap" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              8. Gap Analysis Agent
+            </h2>
+            <p class="mb-4 text-ink-600">Compare: User Business vs Top Competitors</p>
+            <p class="text-ink-600">Find: missing keywords, content gaps, weak SEO pages, low review rating, missing social presence</p>
+          </section>
+
+          <!-- 9. Score -->
+          <section id="score" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              9. Business Score Agent
+            </h2>
+            <p class="mb-4 text-ink-600">Example scoring:</p>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-6 font-mono text-sm text-ink-100"><code>SEO Score: 65/100
+Content Score: 40/100
+Local SEO: 55/100
+Reputation: 72/100
+Social Presence: 30/100
+
+Overall Growth Score: 52/100</code></pre>
+          </section>
+
+          <!-- 10. Strategy -->
+          <section id="strategy" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              10. Strategy Agent
+            </h2>
+            <p class="mb-4 text-ink-600">Generates recommendations like:</p>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-6 font-mono text-sm text-ink-100"><code>Priority 1: Create 10 local SEO pages
+
+Priority 2: Write 5 blogs targeting high traffic keywords
+
+Priority 3: Collect more reviews
+
+Priority 4: Improve Google Business listing</code></pre>
+          </section>
+
+          <!-- 11. Content -->
+          <section id="content" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              11. Content Creation Agents
+            </h2>
+            <p class="mb-6 text-ink-600">Then generate content automatically.</p>
+
+            <div class="space-y-6">
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="content-blog" class="mb-3 font-medium text-ink-900 scroll-mt-24">Blog Agent</h3>
+                <pre class="overflow-x-auto rounded-lg bg-ink-100 p-4 font-mono text-sm text-ink-800"><code>Title: Top 10 Cafes in Pune for Remote Work
+
+Outline: Intro | List | Comparison | Conclusion</code></pre>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="content-social" class="mb-3 font-medium text-ink-900 scroll-mt-24">Social Campaign Agent</h3>
+                <p class="text-sm text-ink-600">Generate: LinkedIn posts, Twitter threads, Facebook campaigns, Instagram captions</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 class="mb-3 font-medium text-ink-900">Email Campaign Agent</h3>
+                <p class="text-sm text-ink-600">Generate: Welcome email, Promotion campaign, Newsletter, Retention campaign</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 12. Tech Stack -->
+          <section id="techstack" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              12. Multi-Agent Tech Stack
+            </h2>
+
+            <div class="space-y-6">
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="techstack-orchestration" class="mb-3 font-medium text-ink-900 scroll-mt-24">AI Orchestration</h3>
+                <p class="text-sm text-ink-600">Best frameworks: LangGraph, CrewAI, AutoGen</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 class="mb-3 font-medium text-ink-900">AI Models</h3>
+                <p class="text-sm text-ink-600">Use: OpenAI GPT, Claude, Llama models</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="techstack-data" class="mb-3 font-medium text-ink-900 scroll-mt-24">Data Collection</h3>
+                <p class="text-sm text-ink-600">Tools: Firecrawl, SerpAPI, Google Maps API, Playwright</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="techstack-storage" class="mb-3 font-medium text-ink-900 scroll-mt-24">Storage</h3>
+                <pre class="overflow-x-auto rounded-lg bg-ink-100 p-4 font-mono text-sm text-ink-800"><code>Vector DB  → Pinecone / Weaviate
+Database  → PostgreSQL
+Cache     → Redis</code></pre>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="techstack-backend" class="mb-3 font-medium text-ink-900 scroll-mt-24">Backend</h3>
+                <p class="text-sm text-ink-600">Python (FastAPI), Node.js</p>
+              </div>
+              <div class="rounded-xl border border-ink-200 bg-white p-6">
+                <h3 id="techstack-frontend" class="mb-3 font-medium text-ink-900 scroll-mt-24">Frontend</h3>
+                <p class="text-sm text-ink-600">Dashboard showing: Competitor map, SEO score, Opportunities, Campaign ideas, Generated content</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 13. Example -->
+          <section id="example" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              13. Example Agent Implementation
+            </h2>
+            <p class="mb-4 text-ink-600">Simple pseudo code:</p>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-6 font-mono text-sm leading-relaxed text-ink-100"><code>class CompetitorAgent:
+
+    def run(business, location):
+
+        results = search_google(
+            f"best {business} near {location}"
+        )
+
+        competitors = extract_businesses(results)
+
+        return competitors</code></pre>
+          </section>
+
+          <!-- 14. Why -->
+          <section id="why" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              14. Why This Idea Is Powerful
+            </h2>
+            <p class="mb-4 text-ink-600">Because this becomes: <strong class="text-ink-900">AI Marketing Analyst + AI Growth Strategist</strong></p>
+            <p class="mb-4 text-ink-600">This is basically what tools like HubSpot, SEMrush, Ahrefs, Jasper try to do separately. Your system combines them.</p>
+          </section>
+
+          <!-- 15. Difficulty -->
+          <section id="difficulty" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              15. Difficulty Level
+            </h2>
+            <pre class="overflow-x-auto rounded-xl border border-ink-200 bg-ink-950 p-6 font-mono text-sm text-ink-100"><code>MVP: 3–4 weeks
+Advanced system: 3–6 months</code></pre>
+          </section>
+
+          <!-- 16. MVP -->
+          <section id="mvp" class="scroll-mt-24">
+            <h2 class="mb-6 text-2xl font-semibold text-ink-900">
+              16. MVP Scope (Important)
+            </h2>
+            <p class="mb-4 text-ink-600">Start smaller. <strong class="text-ink-900">MVP Agents:</strong></p>
+            <ol class="list-inside list-decimal space-y-2 rounded-xl border border-ink-200 bg-white p-6 text-ink-700">
+              <li>Website Analyzer</li>
+              <li>Competitor Finder</li>
+              <li>Review Analyzer</li>
+              <li>SEO Score Agent</li>
+              <li>Blog Generator</li>
+            </ol>
+          </section>
+          </article>
+        </div>
+        <div id="subtopics-float" class="hidden w-52 shrink-0 lg:block">
+          <div class="sticky top-28">
+            <p class="mb-3 text-xs font-medium uppercase tracking-wider text-ink-400">On this topic</p>
+            <nav id="subtopics-nav" class="space-y-1.5 text-sm" aria-label="Subtopics">
+              <p class="text-ink-400">Scroll to a section with subtopics</p>
+            </nav>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+  <script>
+    lucide.createIcons();
+
+    (function() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section[id]');
+      const breadcrumbSection = document.getElementById('breadcrumb-section');
+      const breadcrumbSubtopicWrap = document.getElementById('breadcrumb-subtopic-wrap');
+      const breadcrumbSubtopicText = document.getElementById('breadcrumb-subtopic-text');
+      const headerOffset = 120;
+
+      function stripNumber(str) {
+        return (str || '').replace(/^\d+\.\s*/, '').trim();
+      }
+
+      function getSectionTitle(section) {
+        if (section.id === 'intro') return 'Introduction';
+        const h2 = section.querySelector('h2');
+        return h2 ? stripNumber(h2.textContent) : section.id;
+      }
+
+      function buildScrollTargets() {
+        const targets = [];
+        sections.forEach(section => {
+          const sectionTitle = getSectionTitle(section);
+          targets.push({ top: section.offsetTop, breadcrumb: sectionTitle, sectionId: section.id, subtopicId: null });
+          section.querySelectorAll('h3').forEach(h3 => {
+            const h3Text = h3.textContent.trim();
+            if (h3Text && h3.id) {
+              targets.push({ top: h3.offsetTop, breadcrumb: sectionTitle + ' > ' + h3Text, sectionId: section.id, subtopicId: h3.id });
+            }
+          });
+        });
+        return targets.sort((a, b) => a.top - b.top);
+      }
+
+      function getSubtopics(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (!section) return [];
+        const subs = [];
+        section.querySelectorAll('h3[id]').forEach(h3 => {
+          subs.push({ id: h3.id, text: h3.textContent.trim() });
+        });
+        return subs;
+      }
+
+      const scrollTargets = buildScrollTargets();
+      const subtopicsNav = document.getElementById('subtopics-nav');
+      let lastSection = 'Introduction';
+      let lastSubtopic = '';
+      let lastScrollY = 0;
+
+      function setActiveLink() {
+        let currentId = null;
+        let currentBreadcrumb = 'Introduction';
+        let currentSubtopicId = null;
+        const scrollY = window.scrollY;
+
+        for (const section of sections) {
+          const top = section.offsetTop - headerOffset;
+          if (scrollY >= top) currentId = section.id;
+        }
+
+        for (let i = scrollTargets.length - 1; i >= 0; i--) {
+          if (scrollY >= scrollTargets[i].top - headerOffset) {
+            currentBreadcrumb = scrollTargets[i].breadcrumb;
+            currentSubtopicId = scrollTargets[i].subtopicId;
+            break;
+          }
+        }
+
+        if (!currentId && sections.length) currentId = sections[0].id;
+        if (currentId) {
+          navLinks.forEach(link => {
+            const isActive = link.getAttribute('data-section') === currentId;
+            link.classList.toggle('nav-link-active', isActive);
+          });
+        }
+
+        if (breadcrumbSection) {
+          const hasSubtopic = currentBreadcrumb.includes(' > ');
+          const sectionPart = hasSubtopic ? currentBreadcrumb.split(' > ')[0] : currentBreadcrumb;
+          const subtopicPart = hasSubtopic ? currentBreadcrumb.split(' > ')[1] : '';
+
+          const sectionChanged = sectionPart !== lastSection;
+          const scrollingDown = scrollY > lastScrollY;
+
+          if (sectionChanged) {
+            breadcrumbSection.classList.remove('breadcrumb-slide-up', 'breadcrumb-slide-down');
+            breadcrumbSection.textContent = sectionPart;
+            void breadcrumbSection.offsetWidth;
+            breadcrumbSection.classList.add(scrollingDown ? 'breadcrumb-slide-up' : 'breadcrumb-slide-down');
+            breadcrumbSection.addEventListener('animationend', function handler() {
+              breadcrumbSection.removeEventListener('animationend', handler);
+              breadcrumbSection.classList.remove('breadcrumb-slide-up', 'breadcrumb-slide-down');
+            });
+          }
+
+          if (hasSubtopic) {
+            breadcrumbSubtopicWrap.classList.remove('hidden');
+            const subtopicChanged = subtopicPart !== lastSubtopic;
+
+            if (subtopicChanged) {
+              breadcrumbSubtopicText.classList.remove('breadcrumb-slide-up', 'breadcrumb-slide-down');
+              breadcrumbSubtopicText.textContent = subtopicPart;
+              void breadcrumbSubtopicText.offsetWidth;
+              breadcrumbSubtopicText.classList.add(scrollingDown ? 'breadcrumb-slide-up' : 'breadcrumb-slide-down');
+              breadcrumbSubtopicText.addEventListener('animationend', function handler() {
+                breadcrumbSubtopicText.removeEventListener('animationend', handler);
+                breadcrumbSubtopicText.classList.remove('breadcrumb-slide-up', 'breadcrumb-slide-down');
+              });
+            } else if (sectionChanged) {
+              breadcrumbSubtopicText.textContent = subtopicPart;
+            }
+            lastSubtopic = subtopicPart;
+          } else {
+            breadcrumbSubtopicWrap.classList.add('hidden');
+            lastSubtopic = '';
+          }
+          lastSection = sectionPart;
+        }
+        lastScrollY = scrollY;
+
+        if (subtopicsNav) {
+          const subtopics = getSubtopics(currentId);
+          if (subtopics.length === 0) {
+            subtopicsNav.innerHTML = '<p class="text-ink-400">No subtopics in this section</p>';
+          } else {
+            subtopicsNav.innerHTML = subtopics.map(sub => {
+              const isActive = sub.id === currentSubtopicId;
+              const activeClass = isActive ? 'subtopic-link-active' : '';
+              return `<a href="#${sub.id}" class="subtopic-link block rounded py-1 text-ink-600 transition-colors hover:text-ink-900 ${activeClass}">${sub.text}</a>`;
+            }).join('');
+          }
+        }
+      }
+
+      setActiveLink();
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            setActiveLink();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
