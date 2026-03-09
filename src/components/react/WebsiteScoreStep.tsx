@@ -133,6 +133,7 @@ export default function WebsiteScoreStep() {
       {/* SEO & GEO checklist recommendations */}
       <div className="mt-6 grid gap-4 sm:grid-cols-1">
         <div>
+          <h3 className="mt-2 mb-4  font-semibold flex items-center gap-2 text-sm text-gray-800">SEO checks</h3>
           <ul className="space-y-4">
             {SEO_SAMPLE.map((item) => (
               <li key={item.id} className="flex space-x-2 text-xs">
@@ -143,6 +144,7 @@ export default function WebsiteScoreStep() {
           </ul>
         </div>
         <div>
+          <h3 className="mt-4 mb-4 font-semibold flex items-center gap-2 text-sm text-gray-800">GEO - areas needs improvement</h3>
           <ul className="space-y-4">
             {GEO_SAMPLE.map((item) => (
               <li
