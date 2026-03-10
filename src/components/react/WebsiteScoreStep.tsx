@@ -102,7 +102,7 @@ export default function WebsiteScoreStep() {
   );
 
   return (
-    <div className="flex flex-col border-t border-l border-gray-200 p-6 pb-6 rounded-tl-xl">
+    <div className="flex flex-col border-t border-l border-gray-200 p-6 pb-6 rounded-tl-xl bg-white">
       <div className="grid grid-cols-2 gap-4">
         {/* Donut: Website score */}
         <div className="w-full flex items-center space-x-4 rounded-xl border border-gray-200 bg-gray-50 py-2 px-4">

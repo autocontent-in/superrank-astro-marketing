@@ -3,23 +3,21 @@ import SeoGeoChecklist from "./react/SeoGeoChecklist";
 const brandName = import.meta.env.PUBLIC_BRAND_NAME || "AutoContent";
 ---
 
-<section class="relative overflow-hidden">
-  <!-- White at top and bottom, soft colors in middle -->
-  <div
-    class="absolute inset-0"
-    style="background: linear-gradient(to bottom, white 0%, rgb(247 254 231 / 0.5) 25%, rgb(224 242 254 / 0.4) 50%, rgb(237 233 254 / 0.4) 75%, white 100%);"
-    aria-hidden="true"
-  >
-  </div>
+<section id="hero-parallax" class="relative z-0 overflow-hidden h-[50vh] min-h-[1200px]">
+  <!-- Parallax layer: background and grid move slower than scroll -->
+  <div class="absolute inset-0 hero-parallax-layer" aria-hidden="true">
+    <div
+      class="absolute inset-0 w-full h-[200%] hero-parallax-bg"
+      style="background: linear-gradient(to bottom, white 0%, rgb(247 254 231 / 0.3) 25%, rgb(224 242 254 / 0.4) 50%, rgb(237 233 254 / 0.4) 100%);"
+    ></div>
   <!-- Grid: faint lines with blend so intersections don’t double up; fades in/out top to bottom -->
-  <div
-    class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_0%,black_42%,black_72%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_42%,black_72%,transparent_100%)]"
-    style="background-size: 6rem 3rem; background-image: linear-gradient(to right, rgba(225,225,223,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(225,225,223,0.5) 1px, transparent 1px);"
-    aria-hidden="true"
-  >
+    <div
+      class="absolute inset-0 w-full h-[200%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_42%,black_72%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_42%,black_72%,transparent_100%)] hero-parallax-grid"
+      style="background-size: 6rem 3rem; background-image: linear-gradient(to right, rgba(225,225,223,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(225,225,223,0.5) 1px, transparent 1px);"
+    ></div>
   </div>
   <div
-    class="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-12 sm:pb-16 lg:px-8"
+    class="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-12 sm:pb-16 lg:px-8 hero-parallax-content"
   >
     <div class="max-w-4xl text-left">
       <h1
@@ -48,7 +46,7 @@ const brandName = import.meta.env.PUBLIC_BRAND_NAME || "AutoContent";
         >
         <a
           href="#"
-          class="rounded-lg bg-white shadow-sm border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+          class="inline-flex w-fit items-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50"
           >Read More</a
         >
       </div>
@@ -67,3 +65,44 @@ const brandName = import.meta.env.PUBLIC_BRAND_NAME || "AutoContent";
     </div>
   </div>
 </section>
+
+<style>
+  .hero-parallax-layer {
+    will-change: transform;
+  }
+  .hero-parallax-bg,
+  .hero-parallax-grid {
+    will-change: transform;
+  }
+  .hero-parallax-content {
+    will-change: transform;
+  }
+</style>
+
+<script>
+  (function () {
+    const hero = document.getElementById("hero-parallax");
+    const layer = hero?.querySelector(".hero-parallax-layer") as HTMLElement | null;
+    const content = hero?.querySelector(".hero-parallax-content") as HTMLElement | null;
+    const factor = 0.35; // parallax speed (0 = fixed, 1 = normal scroll)
+
+    function updateParallax() {
+      if (!hero || !layer || !content) return;
+      const rect = hero.getBoundingClientRect();
+      const heroHeight = hero.offsetHeight;
+      // Apply parallax when hero is in or just past view
+      if (rect.bottom > 0 && layer && content) {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const maxOffset = heroHeight * (1 - factor);
+        const offset = Math.min(scrollY * factor, maxOffset);
+        const translate = -offset;
+        layer.style.transform = `translate3d(0, ${translate}px, 0)`;
+        content.style.transform = `translate3d(0, ${translate}px, 0)`;
+      }
+    }
+
+    window.addEventListener("scroll", updateParallax, { passive: true });
+    window.addEventListener("resize", updateParallax);
+    updateParallax();
+  })();
+</script>

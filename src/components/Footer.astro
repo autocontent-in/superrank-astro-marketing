@@ -4,19 +4,13 @@ const tagline = import.meta.env.PUBLIC_TAGLINE || 'Boost your website\'s SEO, GE
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="relative bg-white pt-12 pb-8">
+<footer class="relative bg-white pt-12">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Top section: brand left, menu columns right -->
     <div class="flex flex-col gap-12 pb-12 md:flex-row md:items-start md:justify-between">
       <!-- Left: brand identity -->
       <div class="flex flex-col">
         <div class="flex items-center gap-3">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-800 to-purple-700 text-white">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-            </svg>
-          </div>
           <div class="flex flex-col">
             {brandName.split(' ').length > 1 ? (
               <>
