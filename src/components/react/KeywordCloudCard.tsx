@@ -108,9 +108,9 @@ export default function KeywordCloudCard() {
           >
             <defs>
               <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#22c55e" />
-                <stop offset="70%" stopColor="#4ade80" />
-                <stop offset="100%" stopColor="#86efac" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#2563eb" />
+                <stop offset="70%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#93c5fd" stopOpacity="0.1" />
               </linearGradient>
             </defs>
             <circle

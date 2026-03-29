@@ -39,7 +39,7 @@ export default function HowToStep2() {
         </select>
         <button
           type="submit"
-          className="w-full rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800"
+          className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
         >
           Generate Article
         </button>

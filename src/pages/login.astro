@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'SuperRank';
+---
+
+<Layout title={`Log in — ${brandName}`} description="Log in to your account.">
+  <main class="min-h-screen px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <div class="mx-auto max-w-md w-full -mt-16">
+      <div class="rounded-2xl border border-gray-200 bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.08)] p-8 sm:p-10">
+        <div class="text-center mb-8">
+          <a href="/" class="text-xl font-bold text-gray-900">{brandName}</a>
+          <h1 class="mt-4 text-2xl font-bold tracking-tight text-gray-900">Welcome back</h1>
+          <p class="mt-2 text-sm text-gray-500">Sign in to your account to continue</p>
+        </div>
+
+        <form class="space-y-6" method="post" action="#" id="login-form">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              autocomplete="email"
+              class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/30 sm:text-sm"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+              <a href="#" class="text-sm font-medium text-gray-600 hover:text-blue-600">Forgot password?</a>
+            </div>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              autocomplete="current-password"
+              class="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/30 sm:text-sm"
+              placeholder="••••••••"
+            />
+          </div>
+          <div class="flex items-center">
+            <input
+              id="remember"
+              name="remember"
+              type="checkbox"
+              class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+            />
+            <label for="remember" class="ml-2 block text-sm text-gray-600">Remember me</label>
+          </div>
+          <button
+            type="submit"
+            class="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          >
+            Sign in
+          </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-gray-500">
+          Don't have an account?
+          <a href="/signup" class="font-semibold text-gray-900 hover:text-blue-600">Create account</a>
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>

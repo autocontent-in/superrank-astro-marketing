@@ -8,9 +8,8 @@ export default {
       },
       colors: {
         accent: {
-          green: '#22c55e',
-          'green-light': '#bbf7d0',
-          blue: '#3b82f6',
+          blue: '#2563eb',
+          'blue-light': '#bfdbfe',
           purple: '#8b5cf6',
         },
       },

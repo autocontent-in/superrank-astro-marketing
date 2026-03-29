@@ -40,7 +40,7 @@ const OVERALL_SCORE = 76;
 
 function StatusBadge({ status }: { status: ChecklistItem["status"] }) {
   const styles = {
-    pass: "text-green-500",
+    pass: "text-blue-600",
     warn: "text-amber-500",
     fail: "text-red-500",
   };
@@ -63,7 +63,7 @@ export default function WebsiteScoreStep() {
     () => ({
       chart: { type: "donut" },
       labels: ["Score", "Remaining"],
-      colors: ["#22c55e", "#e5e7eb"],
+      colors: ["#2563eb", "#e5e7eb"],
       dataLabels: { enabled: false },
       plotOptions: {
         pie: {
@@ -116,7 +116,7 @@ export default function WebsiteScoreStep() {
           </div>
           <div className="w-3/5">
             <p className="text-lg font-normal text-gray-700">Overall Score</p>
-            <p className="text-xl font-mono text-green-600">
+            <p className="text-xl font-mono text-blue-600">
               {OVERALL_SCORE} / 100
             </p>
           </div>
@@ -125,7 +125,7 @@ export default function WebsiteScoreStep() {
         <div className="w-full flex items-center space-x-4 rounded-xl border border-gray-200 bg-gray-50 py-2 px-4">
           <div className="w-4/5">
             <p className="text-lg font-normal text-gray-700">Keyword Density</p>
-            <p className="text-xl font-mono text-green-600">1.8 %</p>
+            <p className="text-xl font-mono text-blue-600">1.8 %</p>
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@ export default function WebsiteScoreStep() {
           <ul className="space-y-4">
             {SEO_SAMPLE.map((item) => (
               <li key={item.id} className="flex space-x-2 text-xs">
-                <Check className="w-4 h-4 shrink-0 text-green-500" />
+                <Check className="w-4 h-4 shrink-0 text-blue-600" />
                 <span className="text-gray-700">{item.label}</span>
               </li>
             ))}

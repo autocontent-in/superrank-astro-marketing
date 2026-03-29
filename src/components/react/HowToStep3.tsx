@@ -12,7 +12,7 @@ export default function HowToStep3() {
         <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-gray-200">
           <div
             className="h-full transition-all duration-500"
-            style={{ width: `${progress}%`, backgroundColor: '#a3e635' }}
+            style={{ width: `${progress}%`, backgroundColor: '#2563eb' }}
           />
         </div>
         <p className="mt-2 text-xs text-gray-500">{progress}% complete</p>

@@ -72,7 +72,7 @@ const GEO_ITEMS: ChecklistItem[] = [
 ];
 
 const CATEGORY_SCORES = [
-  { name: "SEO", value: 72, color: "#22c55e" },
+  { name: "SEO", value: 72, color: "#2563eb" },
   { name: "GEO", value: 65, color: "#3b82f6" },
   { name: "Technical", value: 88, color: "#a855f7" },
   { name: "Content", value: 78, color: "#eab308" },
@@ -83,7 +83,7 @@ const OVERALL_SCORE = 76;
 
 function StatusBadge({ status }: { status: ChecklistItem["status"] }) {
   const styles = {
-    pass: "bg-green-100 text-green-800",
+    pass: "bg-blue-100 text-blue-800",
     warn: "bg-amber-100 text-amber-800",
     fail: "bg-red-100 text-red-800",
   };
@@ -102,7 +102,7 @@ export default function SeoGeoChecklist() {
     () => ({
       chart: { type: "donut" },
       labels: ["Score", "Remaining"],
-      colors: ["#22c55e", "#e5e7eb"],
+      colors: ["#2563eb", "#e5e7eb"],
       dataLabels: { enabled: false },
       plotOptions: {
         pie: {
@@ -237,7 +237,7 @@ export default function SeoGeoChecklist() {
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold tracking-tight text-pink-500 flex space-x-2 items-center">
               <span>acme.com</span>
-              <span className="text-lg text-green-600 font-mono font-semibold">
+              <span className="text-lg text-blue-600 font-mono font-semibold">
                 [ {OVERALL_SCORE} / 100 ]
               </span>
             </h1>
@@ -289,7 +289,7 @@ export default function SeoGeoChecklist() {
           <div className="mt-8 grid gap-10 sm:grid-cols-2">
             <div>
               <h3 className="mb-3 flex items-center gap-2 text-base font-semibold text-gray-900">
-                <span className="rounded bg-green-100 p-1.5 text-green-600">
+                <span className="rounded bg-blue-100 p-1.5 text-blue-600">
                   SEO
                 </span>
                 Suggestions &amp; improvements

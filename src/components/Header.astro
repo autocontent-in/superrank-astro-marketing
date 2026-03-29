@@ -1,11 +1,25 @@
 ---
-const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'AutoContent';
+import logoImage from '../assets/superrank_logo.png';
+
+const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'SuperRank';
 ---
 
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-[background,backdrop-filter,border-color] duration-300"
+>
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
     <nav class="hidden items-center gap-8 md:flex">
       <a href="/" class="flex items-center gap-2">
+        <img
+          src={logoImage.src}
+          width={logoImage.width}
+          height={logoImage.height}
+          alt=""
+          class="h-8 w-auto shrink-0 rounded-md object-contain"
+          loading="eager"
+          decoding="async"
+        />
         <span class="text-xl font-bold text-gray-900">{brandName}</span>
       </a>
       <a href="#" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</a>
@@ -14,8 +28,8 @@ const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'AutoContent';
       <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
     </nav>
     <div class="flex items-center gap-4">
-      <a href="#" class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50">Log In</a>
-      <a href="#" class="rounded-lg bg-gray-800 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-800">Create Account</a>
+      <a href="http://localhost:5173/login" class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50">Log In</a>
+      <a href="http://localhost:5173/signup" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">Create Account</a>
     </div>
   </div>
 </header>
@@ -32,10 +46,21 @@ const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'AutoContent';
   window.addEventListener('scroll', updateNavbar);
 </script>
 <style>
+  #navbar {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid transparent;
+  }
+
   #navbar.scrolled {
-    background-color: rgb(255 255 255 / 0.95);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgb(229 231 235 / 0.8);
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.88) 0%,
+      rgb(239 246 255 / 0.82) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: rgb(191 219 254 / 0.55);
   }
 </style>

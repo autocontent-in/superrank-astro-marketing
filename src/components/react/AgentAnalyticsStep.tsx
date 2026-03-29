@@ -130,7 +130,7 @@ export default function AgentAnalyticsStep() {
             >
               <p className="text-xs font-medium text-gray-500">{m.label}</p>
               <p className="mt-1 text-xl font-bold text-gray-900">{m.value}</p>
-              <p className="mt-0.5 text-xs font-medium text-green-600">{m.change}</p>
+              <p className="mt-0.5 text-xs font-medium text-blue-600">{m.change}</p>
             </div>
           ))}
         </div>

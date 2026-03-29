@@ -6,8 +6,8 @@ interface Props {
   description?: string;
 }
 
-const { title = 'AutoContent — AI-Powered SEO & Content', description = 'Boost your website\'s SEO with AI technology. Create SEO articles in seconds and discuss any issues in context with your team.' } = Astro.props;
-const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'AutoContent';
+const { title = 'SuperRank — AI-Powered SEO & Content', description = 'Boost your website\'s SEO with AI technology. Create SEO articles in seconds and discuss any issues in context with your team.' } = Astro.props;
+const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'SuperRank';
 ---
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ const brandName = import.meta.env.PUBLIC_BRAND_NAME || 'AutoContent';
     />
     <title>{title}</title>
   </head>
-  <body class="font-sans antialiased text-gray-900 bg-white">
+  <body class="font-sans antialiased text-slate-900 bg-slate-100">
     <slot />
   </body>
 </html>
