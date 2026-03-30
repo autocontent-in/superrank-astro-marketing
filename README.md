@@ -37,13 +37,19 @@ cd superrank-astro-marketing
 
 #### 3. Copy `.env.example` and rename it to `.env`
 
-#### 4. Run `npm install`
+#### 4. Install packages
+```
+npm install
+```
 
-#### 5. Run the project `npm run dev`
+#### 5. Run the project
+```
+npm run dev
+```
 
 #### Open `http://localhost:4321` in your browser
 
-### That's it. Enjoy
+### That's it!
 
 ## Some of the project screenshots
 ![SuperRank marketing preview](project-images/Image2.png)
