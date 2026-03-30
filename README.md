@@ -4,6 +4,14 @@ An AI-powered platform that helps businesses improve **GEO** (Generative Engine 
 
 This is the customer facing page created using [Astro Web Framework](https://astro.build).
 
+<br />
+<br />
+
+![SuperRank marketing preview](project-images/Image1.png)
+
+<br />
+<br />
+
 ## Below are the required repos associated with this project:
 #### Frontend: [superrank-frontend](https://github.com/autocontent-in/superrank-frontend)
 #### Backend: [superrank-backend](https://github.com/autocontent-in/superrank-backend)
@@ -12,11 +20,6 @@ This is the customer facing page created using [Astro Web Framework](https://ast
 <br />
 
 > **Note:** <br /> The above 3 mentioned repos are required to run  at the same time for the project to run
-
-<br />
-<br />
-
-![SuperRank marketing preview](project-images/Image1.png)
 
 <br />
 <br />
@@ -40,7 +43,7 @@ cd superrank-astro-marketing
 
 #### Open `http://localhost:4321` in your browser
 
-#### That's it. Enjoy
+### That's it. Enjoy
 
 ## Some of the project screenshots
 ![SuperRank marketing preview](project-images/Image2.png)
